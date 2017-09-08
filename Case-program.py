@@ -12,10 +12,10 @@ for i_episode in range(100):
 	for t in range(1000):
 		# Choose actions depending on the state of the cartpole:
 		# if it is traveling to the right, try to stop it by going to the left
-		if observation[1] > 0.001:
+		if observation[1] > 0:
 			action = 0
 		# if traveling to the left, try to stop it by going to the right
-		if observation[1] < -0.001:
+		if observation[1] < 0:
 			action = 1
 		# if the pole is falling to the right, try to stop it by going to the right
 		if observation[2]>0.025:
