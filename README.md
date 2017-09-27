@@ -35,18 +35,15 @@ Combining our Pole Control with the Speed Control, we obtain a new controller, t
 
 We store the reward received in each episode by each of our different controllers: the Random Agent, Speed Control, Unstable Control, Pole Control and Speed + Pole Control. We plot this in the following figure:
 
-
-![figure_1-1](https://user-images.githubusercontent.com/24496178/30890391-e329eea0-a32c-11e7-9224-c1b0269acb7e.png)
-
+![figure_1](https://user-images.githubusercontent.com/24496178/30891060-1afe1186-a331-11e7-8171-ffa6c731fc52.png)
 
 A more clearer picture is seen when we compute to what mean reward every controller tends to (akin to how we usually visualize the Law of Large Numbers, i.e., take increasingly larger samples of our episode runs and compute the mean of these samples). Thus, we see the following:
 
-
-![figure_1-3](https://user-images.githubusercontent.com/24496178/30890400-f0d784ae-a32c-11e7-9c3a-fed26c9d1435.png)
+![figure_1-2](https://user-images.githubusercontent.com/24496178/30891074-29ccae70-a331-11e7-9a3f-6d7684e25446.png)
 
 Finally, wondering about stability for each controller (and more importantly, confirming that the name for 'Unstable Controller' is actually warranted), we calculate the variance of the same samples used in the last plot. We obtain the following:
 
-![figure_1-5](https://user-images.githubusercontent.com/24496178/30890406-fab978ce-a32c-11e7-8ad4-70b850bd9f4c.png)
+![figure_1-4](https://user-images.githubusercontent.com/24496178/30891083-34d2cfa2-a331-11e7-9762-4137cf8daa66.png)
 
 We resume the final (approximate) mean reward and variance in reward each controller obtains after 1000 episodes, in the following table: 
 
