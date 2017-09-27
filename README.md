@@ -36,22 +36,29 @@ Combining our Pole Control with the Speed Control, we obtain a new controller, t
 We store the reward received in each episode by each of our different controllers: the Random Agent, Speed Control, Unstable Control, Pole Control and Speed + Pole Control. We plot this in the following figure:
 
 
-![figure_1-3](https://user-images.githubusercontent.com/24496178/30865759-c1645ca6-a2d7-11e7-9e00-6547d587364e.png)
+![figure_1-1](https://user-images.githubusercontent.com/24496178/30890391-e329eea0-a32c-11e7-9224-c1b0269acb7e.png)
 
 
 A more clearer picture is seen when we compute to what mean reward every controller tends to (akin to how we usually visualize the Law of Large Numbers, i.e., take increasingly larger samples of our episode runs and compute the mean of these samples). Thus, we see the following:
 
 
-![figure_1-1](https://user-images.githubusercontent.com/24496178/30865711-a306f4f8-a2d7-11e7-8a4a-edda9e7e9991.png)
+![figure_1-3](https://user-images.githubusercontent.com/24496178/30890400-f0d784ae-a32c-11e7-9c3a-fed26c9d1435.png)
+
+Finally, wondering about stability for each controller (and more importantly, confirming that the name for 'Unstable Controller' is actually warranted), we calculate the variance of the same samples used in the last plot. We obtain the following:
+
+![figure_1-5](https://user-images.githubusercontent.com/24496178/30890406-fab978ce-a32c-11e7-8ad4-70b850bd9f4c.png)
+
+We resume the final (approximate) mean reward and variance in reward each controller obtains after 1000 episodes, in the following table: 
 
 
-We resume the final (approximate) mean reward each controller obtains after 1000 episodes, in the following table: 
+|      Controller      | Final Mean Reward | Final Variance |
+| :------------------: | :---------------: | :------------: |
+|     Random Agent     |        23         |       125      |
+|     Pole Control     |        26         |       15       |
+|    Speed Control     |        40         |       280      |
+|   Unstable Control   |        42         |       75       |
+| Speed + Pole Control |        200        |        1       |
 
+Thus, we can conclude that, while controlling the horizontal speed of the cart brings a greater increase in reward per episode than just controlling the angle of the pole w.r.t. the vertical, the former is far more unstable than the latter, as we can see in the final plot. The Speed Control controller, however, has an exceedingly high variance, even higher than the Random Agent. 
 
-|      Controller      | Final Mean Reward |
-| :------------------: | :---------------: |
-|     Random Agent     |        23         | 
-|     Pole Control     |        26         |
-|    Speed Control     |        40         |
-|   Unstable Control   |        42         |
-| Speed + Pole Control |        200        |
+Of course, a former statistical analysis is warranted here, but it is beyond the scope of the objective of this small project, which is to illustrate how incredibly hard it is to finetune each and every observation in order to obtain the highest reward. Indeed, it was through mere luck that we chose the two observations that, when controlled at the same time, yield the highest reward possible in the environment. Perhaps this was done through intuition, but still this will not be feasible when the observation (or state) of our agent has hundreds, thousands, millions or more parameters.
