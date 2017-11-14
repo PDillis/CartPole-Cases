@@ -1,8 +1,11 @@
 # CartPole-Cases
+
+Are humans huge If machines? In other words, is everything we do processed through an (albeit huge) list of if conditions that, if met, we should then proceed as planned or do something else? Though perhaps this is a bigger question than one could fathom to answer, it is nevertheless an interesting one and will serve as inspiration to solve simpler environments, such as the `CartPole-v0` environment of [OpenAI](https://www.openai.com). We proceed with the controllers we have defined and used, as well as the results obtained with these.
+
 ## Controllers
 We solve the `CartPole-v0 ` environment using two of the values of the observation we receive. We do this as a way to show how this strategy of solving Gym environments, while perfectly logical and basic, will not give us a general result when the action and state spaces grow in complexity.
 
-We started by comparing a Random Agent with an agent that only controls the horizontal speed (Speed Control), that is:
+We started by comparing a Random Agent with an agent that only controls the horizontal speed (named **Speed Control**), that is:
 
 ```python
 if observation[1]>0:
@@ -11,7 +14,7 @@ if observation[1]<0:
   action = 1
 ```
 
-While an improvement (as we will verify in the following section), this also presented us some stability issues. Mainly, there is no account for what the agent should do if the pole starts to fall to any side. Thus, we introduce the second controller for the angle of the pole, Unstable Control:
+While an improvement (as we will verify in the following section), this also presented us some stability issues. Mainly, there is no account for what the agent should do if the pole starts to fall to any side. Thus, we introduce the second controller for the angle of the pole (named **Unstable Control**):
 
 ```python
 if observation[2]>0:
@@ -20,7 +23,7 @@ if observation[2]<0:
   action = 0
 ```
 
-In other words, if the pole starts to fall to the right, then the agent should go to the right, and if the pole starts to fall to the left, then go left. However, this dd not improve that much our results, as we where obtaining only 2 points more for the final reward (in the mean). Thus, inspired by [JueZ's solution](https://gym.openai.com/evaluations/eval_auJ8CEB6RDSNlcWF7tL4Ng), we instead have a small threshold of speed where the agent should not take any action, and we name it Pole Control:
+In other words, if the pole starts to fall to the right, then the agent should go to the right, and if the pole starts to fall to the left, then go left. However, this dd not improve that much our results, as we where obtaining only 2 points more for the final reward (in the mean). Thus, inspired by [JueZ's solution](https://gym.openai.com/evaluations/eval_auJ8CEB6RDSNlcWF7tL4Ng), we instead have a small threshold of speed where the agent should not take any action, and we name it **Pole Control**:
 
 ```python
 if observation[2]>0.025:
@@ -29,11 +32,11 @@ if observation[2]<-0.025:
   action = 0
 ```
 
-Combining our Pole Control with the Speed Control, we obtain a new controller, the Speed + Pole Control. With it, we find that the agent successfully solves the environment. We then try to add the same type of threshold for the horizontal speed, but found that it is unnecessary as the agent solve the environment with the same amount of mean reward. We try to add controllers on the other elements of the observation tuple, but these are somewhat unnecessary in the end as our agent has already successfully solved the environment.
+Combining our Pole Control with the Speed Control, we obtain a new controller, the **Speed + Pole Control**. With it, we find that the agent successfully solves the environment. We then try to add the same type of threshold for the horizontal speed, but found that it is unnecessary as the agent solve the environment with the same amount of mean reward. We try to add controllers on the other elements of the observation tuple, but these are somewhat unnecessary in the end as our agent has already successfully solved the environment.
 
 ## Results
 
-We store the reward received in each episode by each of our different controllers: the Random Agent, Speed Control, Unstable Control, Pole Control and Speed + Pole Control. We plot this in the following figure:
+We store the reward received in each episode by each of our different controllers: the **Random Agent**, Speed Control, Unstable Control, Pole Control and Speed + Pole Control. We plot this in the following figure:
 
 ![figure_1](https://user-images.githubusercontent.com/24496178/30891060-1afe1186-a331-11e7-8171-ffa6c731fc52.png)
 
